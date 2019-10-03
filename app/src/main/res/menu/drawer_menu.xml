@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <item android:id="@+id/calendar"
-            android:icon="@drawable/ic_assignment_black"
-            android:title="Calendar"
-            />
-        <item android:id="@+id/events"
-            android:icon="@drawable/ic_event_note_black"
-            android:title="My Events"
-            />
-        <item android:id="@+id/logout"
-            android:icon="@drawable/ic_account_box_black"
-            android:title="Logout"
-            />
+    <item
+        android:id="@+id/calendar"
+        android:icon="@drawable/ic_assignment_black"
+        android:title="Calendar" />
+    <item
+        android:id="@+id/events"
+        android:icon="@drawable/ic_event_note_black"
+        android:title="My Events" />
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/ic_account_box_black"
+        android:title="Logout" />
 </menu>

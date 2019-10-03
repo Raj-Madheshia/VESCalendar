@@ -14,7 +14,7 @@ public class FragmentCalendar extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Calendar");
-        return inflater.inflate(R.layout.fragment_calendar, container,false);
+        return inflater.inflate(R.layout.fragment_calendar, container, false);
     }
 }
 

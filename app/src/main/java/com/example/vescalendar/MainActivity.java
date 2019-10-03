@@ -26,18 +26,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        drawerLayout= findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nv);
+
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_navigation_drawer, R.string.close_navigation_drawer);
+
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        if(savedInstanceState == null){
+
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentCalendar()).commit();
             navigationView.setCheckedItem(R.id.calendar);
         }
 
     }
+
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -47,9 +51,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch (menuItem.getItemId()){
+        switch (menuItem.getItemId()) {
             case R.id.calendar:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentCalendar()).commit();
                 break;
