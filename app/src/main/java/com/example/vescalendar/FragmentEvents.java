@@ -1,6 +1,7 @@
 package com.example.vescalendar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.Arrays;
 
 public class FragmentEvents extends Fragment {
@@ -26,18 +29,32 @@ public class FragmentEvents extends Fragment {
     String dates[] = {"123","123","123","123","123","123"};
 
     ListView listView;
+    FloatingActionButton floatingActionButton;
+
+    SqliteDatabaseHelper sqliteDatabaseHelper;
+
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         getActivity().setTitle("My Events");
         View view = inflater.inflate(R.layout.fragment_events, container, false);
 
         listView = view.findViewById(R.id.listview);
 
+        sqliteDatabaseHelper = new SqliteDatabaseHelper(view.getContext());
+
+
         MyAdapter adapter = new MyAdapter(view.getContext(), titles,descriptions, times, dates);
         listView.setAdapter(adapter);
 
+        floatingActionButton = (FloatingActionButton)view.findViewById(R.id.floatingActionButton);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), AddNewEvent.class));
+            }
+        });
         return view;
     }
 

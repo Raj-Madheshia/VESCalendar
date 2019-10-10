@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark">
@@ -10,5 +10,12 @@
         android:id="@+id/listview"
         android:divider="#c9c0bb"
         android:dividerHeight="5sp"
-        ></ListView>
-</RelativeLayout>
+        >
+    </ListView>
+    <include
+        layout="@layout/floating_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom" />
+
+</FrameLayout>
