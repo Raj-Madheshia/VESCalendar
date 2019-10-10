@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         sqliteDatabaseHelper = new SqliteDatabaseHelper(this);
 
         toolbar = findViewById(R.id.toolbar);
@@ -38,10 +41,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        if (savedInstanceState == null) {
+        try{
+            Bundle extras = getIntent().getExtras();
+            String toOpen = extras.getString("toOpen");
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentEvents()).commit();
+        }catch (Exception e){
+            Log.w( "Bunddleeeeeeeeeeee", e );
+            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentCalendar()).commit();
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentCalendar()).commit();
             navigationView.setCheckedItem(R.id.calendar);
         }
+
+//        if (savedInstanceState == null) {
+//
+//        }
+
+
 
     }
 

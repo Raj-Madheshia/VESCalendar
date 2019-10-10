@@ -2,6 +2,7 @@ package com.example.vescalendar;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -54,5 +55,19 @@ public class SqliteDatabaseHelper extends SQLiteOpenHelper {
             return true;
         }
     }
+
+    public Cursor getAllData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res =   db.rawQuery("select * from "+TABLE_NAME+" order by "+COL_4 +" ASC ,"+COL_5+" ASC", null);
+        return res;
+    }
+
+
+    public Cursor getValById(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res =   db.rawQuery("select * from "+TABLE_NAME+" where "+COL_1+"="+id , null);
+        return res;
+    }
+
 
 }

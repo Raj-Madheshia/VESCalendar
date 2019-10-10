@@ -2,6 +2,8 @@ package com.example.vescalendar;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -86,7 +90,9 @@ public class AddNewEvent extends AppCompatActivity {
                     }
                     else{
                         Toast.makeText(AddNewEvent.this, "Data Inserted", Toast.LENGTH_SHORT).show();
-                        onBackPressed();
+                        Intent i = new Intent(AddNewEvent.this, MainActivity.class);
+                        i.putExtra("toOpen", "FragmentEvents");
+                        startActivity(i);
                     }
                 }
             }

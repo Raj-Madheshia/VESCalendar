@@ -4,6 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="16dp"
+    android:layout_weight="3"
+    android:background="#fff"
+    android:elevation="3dp"
     >
     <TextView
         android:layout_width="match_parent"
@@ -11,75 +14,43 @@
         android:textAlignment="center"
         android:gravity="center"
         android:id="@+id/eventTitle"
+        android:background="#046307"
+
         android:text="Events"
         android:textSize="30sp"/>
-    <TableRow
-        android:id="@+id/hr"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#444"></TableRow>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:text="Description"
-            android:paddingRight= "10dp"
-            android:textSize="20sp"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="left"
-            android:paddingLeft="10dp"
-            android:id="@+id/eventdescp"
-            android:text="Desp"
-            android:textSize="20sp"/>
-    </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="120dp"
+            android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:text="Date"
-            android:paddingEnd= "10dp"
+            android:text="Date:"
+            android:textColor="#000"
+            android:paddingLeft="10dp"
             android:textSize="20sp"/>
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:gravity="left"
-            android:paddingLeft="10dp"
+            android:textColor="#000"
             android:id="@+id/eventdate"
             android:text="date"
             android:textSize="20sp"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="Time:"
+            android:textColor="#000"
+            android:paddingLeft="10dp"
+            android:textSize="20sp"/>
         <TextView
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:text="Time"
-            android:paddingEnd="10dp"
-            android:textSize="20sp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:paddingLeft="10dp"
+            android:textColor="#000"
+            android:paddingRight="10dp"
             android:id="@+id/eventtime"
             android:text="time"
             android:textSize="20sp"/>
     </LinearLayout>
-
 
 </LinearLayout>
