@@ -2,6 +2,7 @@ package com.example.vescalendar;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -69,5 +70,23 @@ public class SqliteDatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    public boolean updateData(String id, String title, String desp, String date, String time){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_1, id);
+        contentValues.put(COL_2, title);
+        contentValues.put(COL_3, desp);
+        contentValues.put(COL_4, date);
+        contentValues.put(COL_5, time);
+
+        db.update(TABLE_NAME, contentValues,"ID = ?", new String[]{id});
+        return true;
+    }
+
+    public Integer deleteEvent(String id){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME,"ID = ?", new String[]{id});
+    }
 
 }
