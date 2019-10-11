@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,6 +38,7 @@ public class FragmentEvents extends Fragment {
 //    String dates[] = {"123","123","123","123","123","123"};
 
     ListView listView;
+    private Toolbar toolbar;
     FloatingActionButton floatingActionButton;
 
     SqliteDatabaseHelper sqliteDatabaseHelper;
@@ -45,7 +48,6 @@ public class FragmentEvents extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
         getActivity().setTitle("My Events");
         View view = inflater.inflate(R.layout.fragment_events, container, false);
-
         listView = view.findViewById(R.id.listview);
         listView.setClickable(true);
         sqliteDatabaseHelper = new SqliteDatabaseHelper(view.getContext());
@@ -88,15 +90,33 @@ public class FragmentEvents extends Fragment {
                 String data=(String)adapterView.getItemAtPosition(position);
                 Log.w("Clicked", data );
                 Cursor res = sqliteDatabaseHelper.getValById(data);
+                String e_id="";
+                String e_title="";
+                String e_desp="";
+                String e_date="";
+                String e_time="";
                 while(res.moveToNext()) {
-                    String e_id = res.getString(0);
-                    String e_title = res.getString(1);
-                    String e_desp = res.getString(2);
-                    String e_date = res.getString(3);
-                    String e_time = res.getString(4);
+                    e_id = res.getString(0);
+                    e_title = res.getString(1);
+                    e_desp = res.getString(2);
+                    e_date = res.getString(3);
+                    e_time = res.getString(4);
                     Log.w("printing data", e_id + " " + e_title + " " + e_desp + " " + e_date + " " + e_time);
+                    //getFragmentManager().beginTransaction().replace(R.id.fragment_container, new DisplayEachMyEvents()).addToBackStack("FragementEvents").commit();
+
                 }
+                Intent intent = new Intent(getActivity(), DisplayEachMyEvents.class);
+                Bundle dataBundle = new Bundle();
+                dataBundle.putString("id",e_id);
+                dataBundle.putString("title",e_title);
+                dataBundle.putString("desp",e_desp);
+                dataBundle.putString("date",e_date);
+                dataBundle.putString("time",e_time);
+                intent.putExtras(dataBundle);
+                startActivity(intent);
+
             }
+
         });
 
         floatingActionButton = (FloatingActionButton)view.findViewById(R.id.floatingActionButton);
@@ -149,5 +169,6 @@ public class FragmentEvents extends Fragment {
             return event;
         }
     }
+
 }
 

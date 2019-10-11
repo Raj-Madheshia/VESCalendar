@@ -53,7 +53,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
 //        if (savedInstanceState == null) {
-//
+//            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentCalendar()).commit();
+//            navigationView.setCheckedItem(R.id.calendar);
 //        }
 
 
