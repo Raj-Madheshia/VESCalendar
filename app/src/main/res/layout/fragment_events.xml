@@ -1,25 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/eventfragmentmain"
-    android:background="@color/colorPrimaryDark">
-
-    <ListView
+    android:orientation="vertical"
+    android:id="@+id/eventfragmentmain">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listview"
-        android:divider="#c9c0bb"
-        android:dividerHeight="7dp"
-        android:clickable="true"
-        android:padding="10dp"
-
+        android:layout_height="50dp"
+        android:background="#ffe95451"
         >
-    </ListView>
-    <include
-        layout="@layout/floating_button"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Month"
+            android:layout_gravity="center"
+            android:paddingLeft="20dp"
+            android:textColor="#fff"
+            android:textSize="16sp"
+            android:id="@+id/month"
+            />
+    </LinearLayout>
+    <com.github.sundeepk.compactcalendarview.CompactCalendarView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/compactcalendar_view"
+        android:layout_width="fill_parent"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:layout_height="250dp"
+        app:compactCalendarTargetHeight="300dp"
+        app:compactCalendarTextSize="12sp"
+        app:compactCalendarBackgroundColor="#ffe95451"
+        app:compactCalendarTextColor="#fff"
+        app:compactCalendarCurrentSelectedDayBackgroundColor="#E57373"
+        app:compactCalendarCurrentDayBackgroundColor="#B71C1C"
+        app:compactCalendarMultiEventIndicatorColor="#fff"
+
+        />
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="bottom" />
+        android:orientation="vertical">
 
-</FrameLayout>
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:divider="#c9c0bb"
+            android:dividerHeight="7dp"
+            android:padding="10dp">
+
+        </ListView>
+        <include
+            layout="@layout/floating_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom" />
+    </FrameLayout>
+
+
+</LinearLayout>

@@ -14,35 +14,22 @@
         android:textAlignment="center"
         android:gravity="center"
         android:id="@+id/eventTitle"
-        android:background="#046307"
-
+        android:background="#ffe95451"
         android:text="Events"
-        android:textSize="30sp"/>
+        android:textSize="24sp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="2"
         android:orientation="horizontal">
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:text="Date:"
-            android:textColor="#000"
-            android:paddingLeft="10dp"
-            android:textSize="20sp"/>
         <TextView
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:textColor="#000"
             android:id="@+id/eventdate"
             android:text="date"
-            android:textSize="20sp"/>
-        <TextView
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:text="Time:"
-            android:textColor="#000"
-            android:paddingLeft="10dp"
-            android:textSize="20sp"/>
+            android:layout_weight="1"
+            android:textSize="15sp"/>
         <TextView
             android:layout_width="120dp"
             android:layout_height="wrap_content"
@@ -50,7 +37,8 @@
             android:paddingRight="10dp"
             android:id="@+id/eventtime"
             android:text="time"
-            android:textSize="20sp"/>
+            android:layout_weight="1"
+            android:textSize="15sp"/>
     </LinearLayout>
 
 </LinearLayout>
