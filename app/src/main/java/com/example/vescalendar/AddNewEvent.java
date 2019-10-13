@@ -10,12 +10,14 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.text.SimpleDateFormat;
@@ -27,31 +29,23 @@ public class AddNewEvent extends AppCompatActivity {
 
     private EditText editText1;
     private EditText editText2;
-    private EditText datePicker;
     private EditText timePicker;
     private Button btn;
     private ImageView img;
-    final Calendar myCalendar = Calendar.getInstance();
-
+    private TextView heading;
+    private String date;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_new_event);
         editText1 = (EditText) findViewById(R.id.getTitle);
         editText2 = (EditText) findViewById(R.id.getDesp);
-        datePicker = (EditText) findViewById(R.id.getDate);
         timePicker= (EditText) findViewById(R.id.getTime);
+        heading =(TextView) findViewById(R.id.setheader);
         btn = (Button)findViewById(R.id.addnewevent);
         img = (ImageView)findViewById(R.id.backtofragment);
-
-        datePicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new DatePickerDialog(AddNewEvent.this, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
+        date = getIntent().getExtras().getString("date");
+        heading.setText("Add Event on "+date);
 
         timePicker.setOnClickListener(new View.OnClickListener() {
 
@@ -78,7 +72,6 @@ public class AddNewEvent extends AppCompatActivity {
             public void onClick(View view) {
                 String title = editText1.getText().toString();
                 String desp = editText2.getText().toString();
-                String date = datePicker.getText().toString();
                 String time = timePicker.getText().toString();
                 if(title.matches("") || desp.matches("") || date.matches("") ||time.matches("") ){
                     Toast.makeText(AddNewEvent.this, "All Fields are Compulsory", Toast.LENGTH_SHORT).show();
@@ -91,8 +84,12 @@ public class AddNewEvent extends AppCompatActivity {
                     else{
                         Toast.makeText(AddNewEvent.this, "Data Inserted", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(AddNewEvent.this, MainActivity.class);
-                        i.putExtra("toOpen", "FragmentEvents");
+                        Bundle b = new Bundle();
+                        b.putString("toOpen","FragmentEvents");
+                        i.putExtras(b);
                         startActivity(i);
+
+
                     }
                 }
             }
@@ -106,25 +103,6 @@ public class AddNewEvent extends AppCompatActivity {
     }
     public void onBackPressed() {
         super.onBackPressed();
-    }
-    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
-            // TODO Auto-generated method stub
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, monthOfYear);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            updateLabel();
-        }
-
-    };
-    private void updateLabel() {
-        String myFormat = "yyyy-MM-dd"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
-
-        datePicker.setText(sdf.format(myCalendar.getTime()));
     }
 
 }

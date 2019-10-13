@@ -1,16 +1,15 @@
 package com.example.vescalendar;
 
-import android.app.usage.UsageEvents;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,8 +17,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
@@ -39,7 +39,7 @@ public class FragmentEvents extends Fragment {
     FloatingActionButton floatingActionButton;
 
     SqliteDatabaseHelper sqliteDatabaseHelper;
-
+    private String clickeddate;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
@@ -106,6 +106,11 @@ public class FragmentEvents extends Fragment {
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             public void onDayClick(Date dateClicked) {
                 List<Event> events = compactCalendarView.getEvents(dateClicked);
+
+                long full = dateClicked.getTime();
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+                String asString = formatter.format(full);
+                clickeddate = asString.substring(0,10);
                 String ID[];
                 String TITLE[];
                 String TIME[];
@@ -143,8 +148,16 @@ public class FragmentEvents extends Fragment {
                         TIME = new String[size];
                     }
                 }
+                System.out.println(DATE);
                 MyAdapter adapter = new MyAdapter(view.getContext(), ID, TITLE, TIME, DATE);
                 listView.setAdapter(adapter);
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    }
+                });
 
             }
 
@@ -167,7 +180,9 @@ public class FragmentEvents extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), AddNewEvent.class));
+                Intent intent = new Intent(getActivity(), AddNewEvent.class);
+                intent.putExtra("date", clickeddate);
+                startActivity(intent);
             }
         });
 

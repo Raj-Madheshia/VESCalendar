@@ -28,6 +28,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#fff"
                 android:textSize="20sp"
+                android:id="@+id/setheader"
                 android:text="Add New Events"
                 android:layout_gravity="center"/>
         </LinearLayout>
@@ -104,40 +105,6 @@
                 android:textColorHint="#e317d2"
                 android:inputType="textMultiLine"
                 android:textSize="20sp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:text="Date"
-                android:paddingEnd="10dp"
-                android:textStyle="bold"
-                android:textSize="20sp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=":"
-                android:textStyle="bold"
-                android:textSize="20sp"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:paddingLeft="10dp"
-                android:id="@+id/getDate"
-                android:hint="Select Date"
-                android:textColorHint="#e317d2"
-                android:clickable="true"
-                android:focusable="false"
-                android:drawableRight="@drawable/ic_cal_black"
-                android:textSize="20sp"
-                android:editable="false"
-                />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
