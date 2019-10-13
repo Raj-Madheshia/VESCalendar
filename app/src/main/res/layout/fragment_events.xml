@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#ffe95451"
+        android:background="#ffa480"
         >
         <TextView
             android:layout_width="wrap_content"
@@ -15,7 +15,7 @@
             android:text="Month"
             android:layout_gravity="center"
             android:paddingLeft="20dp"
-            android:textColor="#fff"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp"
             android:id="@+id/month"
             />
@@ -29,10 +29,10 @@
         android:layout_height="250dp"
         app:compactCalendarTargetHeight="300dp"
         app:compactCalendarTextSize="12sp"
-        app:compactCalendarBackgroundColor="#ffe95451"
+        app:compactCalendarBackgroundColor="@color/colorPrimary"
         app:compactCalendarTextColor="#fff"
-        app:compactCalendarCurrentSelectedDayBackgroundColor="#E57373"
-        app:compactCalendarCurrentDayBackgroundColor="#B71C1C"
+        app:compactCalendarCurrentSelectedDayBackgroundColor="#862C03"
+        app:compactCalendarCurrentDayBackgroundColor="#BE3737"
         app:compactCalendarMultiEventIndicatorColor="#fff"
 
         />
@@ -47,7 +47,7 @@
             android:layout_height="match_parent"
             android:clickable="true"
             android:divider="#c9c0bb"
-            android:dividerHeight="7dp"
+            android:dividerHeight="3dp"
             android:padding="10dp">
 
         </ListView>

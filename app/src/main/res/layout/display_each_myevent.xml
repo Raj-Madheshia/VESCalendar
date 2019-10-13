@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,12 +29,14 @@
             android:layout_height="wrap_content"
             android:textColor="#fff"
             android:textSize="20sp"
+            android:paddingLeft="2dp"
             android:layout_gravity="center"
             android:text="Event Detail"/>
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -55,8 +58,10 @@
                 android:id="@+id/event_detail_eventDesp"
                 android:textColor="#033"
                 android:text="Desp"
-                android:paddingLeft="40dp"
+                android:paddingLeft="0dp"
                 android:textSize="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -90,7 +95,7 @@
                     android:clickable="true"
                     android:elevation="3dp"
                     android:shadowColor="#011"
-                    android:background="#FFFF33"/>
+                    android:background="@color/colorPrimary"/>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -98,7 +103,7 @@
                     android:id="@+id/delete"
                     android:clickable="true"
                     android:textAlignment="center"
-                    android:background="#B22222"
+                    android:background="#E2493F"
                     android:textSize="20dp"
                     android:elevation="3dp"
                     android:shadowColor="#011"
