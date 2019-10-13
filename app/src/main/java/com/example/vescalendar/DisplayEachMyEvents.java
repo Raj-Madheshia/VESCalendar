@@ -72,7 +72,7 @@ public class DisplayEachMyEvents extends AppCompatActivity {
                     Toast.makeText(DisplayEachMyEvents.this, "Unable to Delete data", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(DisplayEachMyEvents.this, "Data Inserted", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DisplayEachMyEvents.this, "Data Deleted", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(DisplayEachMyEvents.this, MainActivity.class);
                     i.putExtra("toOpen", "FragmentEvents");
                     startActivity(i);
