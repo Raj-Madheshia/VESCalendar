@@ -74,7 +74,10 @@ public class DisplayEachMyEvents extends AppCompatActivity {
                 else{
                     Toast.makeText(DisplayEachMyEvents.this, "Data Deleted", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(DisplayEachMyEvents.this, MainActivity.class);
-                    i.putExtra("toOpen", "FragmentEvents");
+                    Bundle b = new Bundle();
+                    b.putString("toOpen","FragmentEvents");
+                    i.putExtras(b);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(i);
                 }
             }

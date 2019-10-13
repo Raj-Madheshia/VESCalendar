@@ -25,6 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -38,6 +39,9 @@ public class FragmentEvents extends Fragment {
 
     SqliteDatabaseHelper sqliteDatabaseHelper;
     private String clickeddate;
+    Date todayDate = Calendar.getInstance().getTime();
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
@@ -51,9 +55,10 @@ public class FragmentEvents extends Fragment {
         compactCalendarView.setUseThreeLetterAbbreviation(true);
         Event ev;
         sqliteDatabaseHelper = new SqliteDatabaseHelper(view.getContext());
-
+        clickeddate= formatter.format(todayDate);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
         Date gmt = null;
+
 
 
         String ID[];

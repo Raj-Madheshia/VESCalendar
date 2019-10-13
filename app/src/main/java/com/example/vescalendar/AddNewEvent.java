@@ -87,6 +87,7 @@ public class AddNewEvent extends AppCompatActivity {
                         Bundle b = new Bundle();
                         b.putString("toOpen","FragmentEvents");
                         i.putExtras(b);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(i);
 
 
