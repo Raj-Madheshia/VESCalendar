@@ -29,3 +29,4 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.github.sundeepk:compact-calendar-view:3.0.0'
 }
+

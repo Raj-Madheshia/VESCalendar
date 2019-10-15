@@ -14,7 +14,7 @@
         android:textAlignment="center"
         android:gravity="center"
         android:id="@+id/eventTitle"
-        android:background="#ffe95451"
+        android:background="#ffa480"
         android:text="Events"
         android:textSize="24sp"/>
     <LinearLayout

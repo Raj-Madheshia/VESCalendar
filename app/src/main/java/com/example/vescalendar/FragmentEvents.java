@@ -18,8 +18,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
@@ -27,6 +25,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -40,6 +39,9 @@ public class FragmentEvents extends Fragment {
 
     SqliteDatabaseHelper sqliteDatabaseHelper;
     private String clickeddate;
+    Date todayDate = Calendar.getInstance().getTime();
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
@@ -53,9 +55,10 @@ public class FragmentEvents extends Fragment {
         compactCalendarView.setUseThreeLetterAbbreviation(true);
         Event ev;
         sqliteDatabaseHelper = new SqliteDatabaseHelper(view.getContext());
-
+        clickeddate= formatter.format(todayDate);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
         Date gmt = null;
+
 
 
         String ID[];
@@ -152,12 +155,6 @@ public class FragmentEvents extends Fragment {
                 MyAdapter adapter = new MyAdapter(view.getContext(), ID, TITLE, TIME, DATE);
                 listView.setAdapter(adapter);
 
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                    }
-                });
 
             }
 
@@ -175,6 +172,35 @@ public class FragmentEvents extends Fragment {
             }
         });
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                String data=(String)adapterView.getItemAtPosition(position);
+                Log.w("Clicked", data );
+                Cursor res = sqliteDatabaseHelper.getValById(data);
+                String e_id="";
+                String e_title="";
+                String e_desp="";
+                String e_date="";
+                String e_time="";
+                while(res.moveToNext()) {
+                    e_id = res.getString(0);
+                    e_title = res.getString(1);
+                    e_desp = res.getString(2);
+                    e_date = res.getString(3);
+                    e_time = res.getString(4);
+                }
+                Intent intent = new Intent(getActivity(), DisplayEachMyEvents.class);
+                Bundle dataBundle = new Bundle();
+                dataBundle.putString("id",e_id);
+                dataBundle.putString("title",e_title);
+                dataBundle.putString("desp",e_desp);
+                dataBundle.putString("date",e_date);
+                dataBundle.putString("time",e_time);
+                intent.putExtras(dataBundle);
+                startActivity(intent);
+            }
+        });
 
         floatingActionButton = (FloatingActionButton)view.findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
