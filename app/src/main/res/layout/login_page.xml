@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="#1261A0"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/logo3"
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="5dp"
+        android:drawableLeft="@drawable/ic_account_box_black"
+        android:drawablePadding="5dp"
+        android:hint="Email Id"
+        android:inputType="textEmailAddress"
+        android:id="@+id/login_emailid"
+        android:textSize="24sp"
+        android:background="@drawable/circular_edittext"
+        android:textColor="#000"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/ic_key"
+        android:drawablePadding="5dp"
+        android:hint="Password"
+        android:textSize="24sp"
+        android:inputType="textPassword"
+        android:id="@+id/login_pass"
+        android:background="@drawable/circular_edittext"
+        android:textColor="#fff"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:id="@+id/logIntoAccount"
+        android:backgroundTint="#ff00a5"
+        android:text="Login"
+        android:textSize="24sp"
+        android:background="@drawable/circular_edittext"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unable to log in. Verify Email Id and Password"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:layout_marginTop="30dp"
+        android:visibility="invisible"
+        android:id="@+id/errortext"
+        android:textColor="#f00"
+        />
+</LinearLayout>
