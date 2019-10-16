@@ -39,7 +39,7 @@
         android:inputType="textPassword"
         android:id="@+id/login_pass"
         android:background="@drawable/circular_edittext"
-        android:textColor="#fff"/>
+        android:textColor="#000"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
