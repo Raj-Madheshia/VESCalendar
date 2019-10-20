@@ -1,5 +1,6 @@
 package com.example.vescalendar;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,12 +28,13 @@ public class Login extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
-        final SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
+        final SharedPreferences sharedPref =  getSharedPreferences("Login", 0);
         final SharedPreferences.Editor editor = sharedPref.edit();
 
         String id = sharedPref.getString("user_id",null);
+
         if(id!=null){
-            Log.d("Testing Login page","id not null");
+            Log.d("Testing Login page",id);
             Intent i = new Intent(Login.this, MainActivity.class);
             startActivity(i);
         }
@@ -45,7 +48,6 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String email =  emailid.getText().toString();
                 String pass = password.getText().toString();
 
@@ -54,7 +56,6 @@ public class Login extends AppCompatActivity {
                 try {
                     result = bg.execute(email, pass).get();
                     Log.d("Is this working",result);
-
                     if(result.equals("Login Failed")){
 
                         error.setVisibility(View.VISIBLE);

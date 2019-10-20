@@ -1,6 +1,7 @@
 package com.example.vescalendar;
 
 import android.os.AsyncTask;
+import android.widget.ProgressBar;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Background extends AsyncTask<String, Void, String> {
-
+    ProgressBar progressBar;
     @Override
     protected String doInBackground(String... strings) {
         String result= null;
