@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#ffa480"
+        android:background="#ff9800"
         >
         <TextView
             android:layout_width="wrap_content"
@@ -15,9 +15,10 @@
             android:text="Month"
             android:layout_gravity="center"
             android:paddingLeft="20dp"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="#fff"
             android:textSize="16sp"
             android:id="@+id/month"
+            android:textStyle="bold"
             />
     </LinearLayout>
     <com.github.sundeepk.compactcalendarview.CompactCalendarView
@@ -29,7 +30,7 @@
         android:layout_height="250dp"
         app:compactCalendarTargetHeight="300dp"
         app:compactCalendarTextSize="12sp"
-        app:compactCalendarBackgroundColor="@color/colorPrimary"
+        app:compactCalendarBackgroundColor="#ff9800"
         app:compactCalendarTextColor="#fff"
         app:compactCalendarCurrentSelectedDayBackgroundColor="#862C03"
         app:compactCalendarCurrentDayBackgroundColor="#BE3737"
@@ -39,6 +40,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/maincolor"
         android:orientation="vertical">
 
         <ListView

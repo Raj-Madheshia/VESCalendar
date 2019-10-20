@@ -48,10 +48,10 @@ public class DisplayEachMyEvents extends AppCompatActivity {
         date= extras.getString("date");;
         time= extras.getString("time");;
 
-        Title.setText(title);
-        Desp.setText(desp);
-        Date.setText(date);
-        Time.setText(time);
+        Title.setText("Title: "+title);
+        Desp.setText("Desp: "+desp);
+        Date.setText("Date: "+date);
+        Time.setText("Time: "+time);
 
         img = (ImageView) findViewById(R.id.moveBacktoAllEvents);
         img.setOnClickListener(new View.OnClickListener() {

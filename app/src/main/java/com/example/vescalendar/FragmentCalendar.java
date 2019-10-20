@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +34,7 @@ import java.util.concurrent.ExecutionException;
 
 public class FragmentCalendar extends Fragment {
     ListView listView;
+    String dataFetch =null;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,15 +43,25 @@ public class FragmentCalendar extends Fragment {
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
 
         listView = view.findViewById(R.id.listview);
+        final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.pullToRefresh);
         final SharedPreferences sharedPref = getActivity().getSharedPreferences("Login",0);
-        String id = sharedPref.getString("user_id", "");
+        final String id = sharedPref.getString("user_id", "");
 
+        getData(id);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData(id);
+                pullToRefresh.setRefreshing(false);
+            }
+        });
 
+        return view;
+    }
+    public void getData(String id){
         if(id!=null){
             Log.d("Working",id);
             Background b = new Background();
-
-            String dataFetch = null;
             try {
                 dataFetch = b.execute(id).get();
                 Log.d("This fetched data",dataFetch);
@@ -62,11 +74,7 @@ public class FragmentCalendar extends Fragment {
         else{
             Log.d("Not working",id);
         }
-
-
-        return view;
     }
-
 
     public class Background extends AsyncTask<String, Void, String> {
         public static final int CONNECTION_TIMEOUT = 10000;

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout android:layout_width="match_parent"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/pullToRefresh"
+    android:background="@color/maincolor"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ListView
@@ -11,7 +13,7 @@
         android:clickable="true"
         android:divider="#c9c0bb"
         android:dividerHeight="3dp"
-        android:padding="10dp">
-
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
     </ListView>
-</FrameLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
