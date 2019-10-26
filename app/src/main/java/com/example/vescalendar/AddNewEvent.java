@@ -24,9 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class AddNewEvent extends AppCompatActivity {
-
     SqliteDatabaseHelper sqliteDatabaseHelper;
-
     private EditText editText1;
     private EditText editText2;
     private EditText timePicker;

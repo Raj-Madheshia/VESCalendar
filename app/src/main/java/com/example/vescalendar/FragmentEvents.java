@@ -118,6 +118,10 @@ public class FragmentEvents extends Fragment {
                 String TITLE[];
                 String TIME[];
                 String DATE[];
+                String year;
+                String month;
+                String date;
+                String testdate;
                 int i =0;
                 int sizeoflist =0;
                 if(events.size()>0) {
@@ -135,11 +139,19 @@ public class FragmentEvents extends Fragment {
                 for (Event item : events) {
                     String id = (String) item.getData();
                     Cursor res = sqliteDatabaseHelper.getValById(id);
+
+                    String months[] ={"Jan","Feb","Mar","Apr", "May", "Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+
                     if (res.getCount() != 0) {
                         while (res.moveToNext()) {
                             ID[i] = res.getString(0);
                             TITLE[i] = res.getString(1);
-                            DATE[i] = res.getString(3);
+                            testdate= res.getString(3);
+                            year = testdate.substring(0,4);
+                            month= testdate.substring(5,7);
+                            date = testdate.substring(8,10);
+                            int monthint = Integer.parseInt(month) -1;
+                            DATE[i] = months[monthint]+" "+date+", "+year;
                             TIME[i] = res.getString(4);
                             i += 1;
                         }
@@ -167,7 +179,7 @@ public class FragmentEvents extends Fragment {
                 String month = asString.substring(5,7);
                 String months[] ={"Jan","Feb","Mar","Apr", "May", "Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
                 int monthint = Integer.parseInt(month) -1;
-                yearmonth.setText(months[monthint]+" "+Year);
+                yearmonth.setText(months[monthint]+", "+Year);
                 Log.d("Month", "Month was scrolled to: " + firstDayOfNewMonth);
             }
         });
@@ -221,6 +233,7 @@ public class FragmentEvents extends Fragment {
         String mtime[];
         String mdate[];
         String Id[];
+        int i =0;
 
         MyAdapter(Context c, String Id[], String title[], String time[], String date[]) {
             super(c, R.layout.eventlayout, R.id.eventTitle, Id);
@@ -243,11 +256,10 @@ public class FragmentEvents extends Fragment {
             TextView eventDate = event.findViewById(R.id.eventdate);
             TextView eventTime = event.findViewById(R.id.eventtime);
 
-
             eventTitle.setText(mTitle[position]);
             //eventDesp.setText(mDesp[position]);
-            eventDate.setText("Date: "+mdate[position]);
-            eventTime.setText("Time: "+mtime[position]);
+            eventDate.setText(mdate[position]);
+            eventTime.setText(mtime[position]);
 
             return event;
         }
