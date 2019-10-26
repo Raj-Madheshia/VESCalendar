@@ -3,21 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#38324e"
     android:id="@+id/eventfragmentmain">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#ffa480"
+        android:background="@color/maincolor"
+        android:gravity="center_vertical|left"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Month"
             android:layout_gravity="center"
-            android:paddingLeft="20dp"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="#fff"
             android:textSize="16sp"
             android:id="@+id/month"
+            android:textStyle="bold"
             />
     </LinearLayout>
     <com.github.sundeepk.compactcalendarview.CompactCalendarView
@@ -29,16 +33,29 @@
         android:layout_height="250dp"
         app:compactCalendarTargetHeight="300dp"
         app:compactCalendarTextSize="12sp"
-        app:compactCalendarBackgroundColor="@color/colorPrimary"
+        app:compactCalendarBackgroundColor="#403a60"
         app:compactCalendarTextColor="#fff"
         app:compactCalendarCurrentSelectedDayBackgroundColor="#862C03"
         app:compactCalendarCurrentDayBackgroundColor="#BE3737"
         app:compactCalendarMultiEventIndicatorColor="#fff"
 
         />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="UpComing"
+        android:paddingLeft="15dp"
+        android:textSize="20dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        />
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/maincolor"
+        android:layout_marginTop="5dp"
         android:orientation="vertical">
 
         <ListView
@@ -46,9 +63,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clickable="true"
-            android:divider="#c9c0bb"
             android:dividerHeight="3dp"
-            android:padding="10dp">
+            android:padding="1dp">
 
         </ListView>
         <include

@@ -1,8 +1,6 @@
 package com.example.vescalendar;
-
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -16,9 +14,6 @@ public class SqliteDatabaseHelper extends SQLiteOpenHelper {
     public static  final String COL_3 =  "DESCRIPTION";
     public static  final String COL_4 =  "EVENT_DATE";
     public static  final String COL_5 =  "EVENT_TIME";
-
-
-
 
     public SqliteDatabaseHelper(Context context) {
 

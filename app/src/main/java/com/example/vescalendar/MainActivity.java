@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -75,7 +76,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            finish();
+                            Intent a = new Intent(Intent.ACTION_MAIN);
+                            a.addCategory(Intent.CATEGORY_HOME);
+                            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(a);
                         }
 
                     })

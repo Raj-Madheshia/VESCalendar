@@ -2,20 +2,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.vescalendar">
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/main"
+        android:label="Ves Calendar"
+        android:roundIcon="@mipmap/main"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity" android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".Login"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+                <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".AddNewEvent"
@@ -26,6 +34,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".DisplayEachMyEvents"
+            android:label="Show Event"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".UpdateEvent"
             android:label="Show Event"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

@@ -7,9 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -23,6 +21,11 @@ public class DisplayEachMyEvents extends AppCompatActivity {
     Button update;
     Button delete;
     String id;
+    String desp;
+    String date;
+    String time;
+
+    String title;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.display_each_myevent);
@@ -38,15 +41,15 @@ public class DisplayEachMyEvents extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         id = extras.getString("id");
-        String title= extras.getString("title");;
-        String desp= extras.getString("desp");;
-        String date= extras.getString("date");;
-        String time= extras.getString("time");;
+        title= extras.getString("title");;
+        desp= extras.getString("desp");;
+        date= extras.getString("date");;
+        time= extras.getString("time");;
 
-        Title.setText(title);
-        Desp.setText(desp);
-        Date.setText(date);
-        Time.setText(time);
+        Title.setText("Title: "+title);
+        Desp.setText("Desp: "+desp);
+        Date.setText("Date: "+date);
+        Time.setText("Time: "+time);
 
         img = (ImageView) findViewById(R.id.moveBacktoAllEvents);
         img.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +63,18 @@ public class DisplayEachMyEvents extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Integer deleteRow =  sqliteDatabaseHelper.updateData(id);
+                Bundle b = new Bundle();
+                Intent i = new Intent(DisplayEachMyEvents.this, UpdateEvent.class);
 
+                b.putString("id", id);
+                b.putString("title", title);
+                b.putString("desp", desp);
+                b.putString("date", date);
+                b.putString("time", time);
+                i.putExtras(b);
+
+                startActivity(i);
             }
         });
 
