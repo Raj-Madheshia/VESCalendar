@@ -17,6 +17,7 @@
         android:theme="@style/Theme.Design.Light"
         android:src="@drawable/ic_add_circle_outline_black"
         app:maxImageSize="40dp"
+        android:backgroundTint="@color/colorPrimary"
         />
 
 </RelativeLayout>

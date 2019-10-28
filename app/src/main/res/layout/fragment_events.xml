@@ -5,25 +5,40 @@
     android:orientation="vertical"
     android:background="#38324e"
     android:id="@+id/eventfragmentmain">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/maincolor"
-        android:gravity="center_vertical|left"
-        android:layout_gravity="center_horizontal"
-        android:orientation="vertical"
         >
+        <ImageView
+            android:id="@+id/left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:clickable="true"
+            />
+        <ImageView
+            android:id="@+id/right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow_right_black_24dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:clickable="true"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Month"
-            android:layout_gravity="center"
             android:textColor="#fff"
             android:textSize="16sp"
             android:id="@+id/month"
             android:textStyle="bold"
+            android:layout_centerInParent="true"
             />
-    </LinearLayout>
+    </RelativeLayout>
     <com.github.sundeepk.compactcalendarview.CompactCalendarView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/compactcalendar_view"
@@ -35,8 +50,8 @@
         app:compactCalendarTextSize="12sp"
         app:compactCalendarBackgroundColor="#403a60"
         app:compactCalendarTextColor="#fff"
-        app:compactCalendarCurrentSelectedDayBackgroundColor="#862C03"
-        app:compactCalendarCurrentDayBackgroundColor="#BE3737"
+        app:compactCalendarCurrentSelectedDayBackgroundColor="#E74A87"
+        app:compactCalendarCurrentDayBackgroundColor="#7F61B9"
         app:compactCalendarMultiEventIndicatorColor="#fff"
 
         />

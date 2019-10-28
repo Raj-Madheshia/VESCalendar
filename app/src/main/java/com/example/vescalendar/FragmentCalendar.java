@@ -1,7 +1,7 @@
 package com.example.vescalendar;
 
-import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -9,9 +9,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,24 +33,33 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 public class FragmentCalendar extends Fragment {
     ListView listView;
     String dataFetch =null;
+    ProgressBar pb;
+
+    String p_Title[];
+    String p_Desp[];
+    String p_Time[];
+    String p_Date[];
+    String p_Id[];
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getActivity().setTitle("Calendar");
 
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
-
+        pb = (ProgressBar) view.findViewById(R.id.progress_calendar);
         listView = view.findViewById(R.id.listview);
         final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.pullToRefresh);
         final SharedPreferences sharedPref = getActivity().getSharedPreferences("Login",0);
         final String id = sharedPref.getString("user_id", "");
-
+        pb.setVisibility(View.VISIBLE);
         getData(id);
+
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -56,23 +68,53 @@ public class FragmentCalendar extends Fragment {
             }
         });
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String data=(String)adapterView.getItemAtPosition(i);
+                int index  = getID(data);
+                String title = getTitle(index);
+                String desp = getDesp(index);
+                String date = getDate(index);
+                String time = getTime(index);
+
+                Intent intent = new Intent(getActivity(), DisplayEachCalendar.class);
+                Bundle dataBundle = new Bundle();
+                dataBundle.putString("id",data);
+                dataBundle.putString("title",title);
+                dataBundle.putString("desp",desp);
+                dataBundle.putString("date",date);
+                dataBundle.putString("time",time);
+                intent.putExtras(dataBundle);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
+    public int getID(String v){
+        return  Arrays.asList(p_Id).indexOf(v);
+    }
+    public String getTitle(int v){
+        return  p_Title[v];
+    }
+    public String getDesp(int v){
+        return  p_Desp[v];
+    }
+    public String getDate(int v){
+        return  p_Date[v];
+    }
+    public String getTime(int v){
+        return  p_Time[v];
+    }
+
+
     public void getData(String id){
         if(id!=null){
-            Log.d("Working",id);
-            Background b = new Background();
-            try {
-                dataFetch = b.execute(id).get();
-                Log.d("This fetched data",dataFetch);
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            new Background().execute(id);
         }
         else{
-            Log.d("Not working",id);
+            Toast.makeText(getActivity(),"Unable to fetch data in android",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -127,6 +169,7 @@ public class FragmentCalendar extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            pb.setVisibility(View.GONE);
             String Eid[];
             String Title[];
             String Desp[];
@@ -149,7 +192,7 @@ public class FragmentCalendar extends Fragment {
                     Date[i] = jsonObject.getString("date");
                     Time[i] = jsonObject.getString("time");
                 }
-                MyAdapter adapter = new MyAdapter(getActivity(), Eid, Title, Time, Date);
+                MyAdapter adapter = new MyAdapter(getActivity(), Eid, Title,Desp ,Time, Date);
                 listView.setAdapter(adapter);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -161,20 +204,25 @@ public class FragmentCalendar extends Fragment {
     class MyAdapter extends ArrayAdapter<String> {
         Context c;
         String mTitle[];
-        //String mDesp[];
+        String mDesp[];
         String mtime[];
         String mdate[];
         String Id[];
 
-        MyAdapter(Context c, String Id[], String title[], String time[], String date[]) {
-            super(c, R.layout.eventlayout, R.id.eventTitle, Id);
+        MyAdapter(Context c, String id[], String title[],String desp[], String time[], String date[]) {
+            super(c, R.layout.eventlayout, R.id.eventTitle, id);
             this.c = c;
             this.mTitle = title;
-            //this.mDesp = descp;
+            this.mDesp = desp;
             this.mdate = date;
             this.mtime = time;
-            this.Id = Id;
+            this.Id = id;
 
+            p_Title = this.mTitle;
+            p_Desp = this.mDesp;
+            p_Time = this.mtime;
+            p_Date = this.mdate;
+            p_Id = this.Id;
         }
 
         @Override

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,7 +35,7 @@ public class FragmentEvents extends Fragment {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
     ListView listView;
     TextView yearmonth;
-
+    private ImageView left, right;
     FloatingActionButton floatingActionButton;
 
     SqliteDatabaseHelper sqliteDatabaseHelper;
@@ -106,6 +107,14 @@ public class FragmentEvents extends Fragment {
             TIME= new String[size];
         }
 
+        left = (ImageView) view.findViewById(R.id.left);
+        right = (ImageView) view.findViewById(R.id.right);
+//        left.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ompactCalendarView.showNextMonth();
+//            }
+//        });
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             public void onDayClick(Date dateClicked) {
                 List<Event> events = compactCalendarView.getEvents(dateClicked);
