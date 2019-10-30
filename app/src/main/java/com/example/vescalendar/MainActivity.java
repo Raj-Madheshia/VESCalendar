@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             new AlertDialog.Builder(this)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setTitle("Close App")
-                    .setMessage("Are you sure you want to close this activity?")
+                    .setMessage("Are you sure you want to close this App?")
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener()
                     {
                         @Override
@@ -101,7 +102,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new FragmentEvents()).commit();
                 break;
             case R.id.logout:
-                Toast.makeText(this, "Logout Pressed", Toast.LENGTH_SHORT).show();
+                new AlertDialog.Builder(this)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setTitle("Logout")
+                        .setMessage("Are you sure you want to Logout?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent a = new Intent(MainActivity.this, Login.class);
+                                final SharedPreferences sharedPref =  getSharedPreferences("Login", 0);
+                                SharedPreferences.Editor editor = sharedPref.edit();
+
+                                String id = sharedPref.getString("user_id","Not___Workinh");
+                                Log.d("Shared pref",id);
+                                a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                editor.putString("user_id",null);
+                                editor.apply();
+                                startActivity(a);
+                            }
+
+                        })
+                        .setNegativeButton("No", null).show();
                 break;
 
         }

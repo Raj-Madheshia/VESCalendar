@@ -23,7 +23,6 @@ public class DisplayEachCalendar  extends AppCompatActivity {
     String desp;
     String date;
     String time;
-
     String title;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
