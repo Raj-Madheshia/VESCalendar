@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -23,11 +24,11 @@ public class Login extends AppCompatActivity {
     EditText emailid, password;
     TextView error;
     Button login;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
+
         final SharedPreferences sharedPref =  getSharedPreferences("Login", 0);
         final SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -35,7 +36,7 @@ public class Login extends AppCompatActivity {
 
         if(id!=null){
             Log.d("Testing Login page",id);
-            Intent i = new Intent(Login.this, MainActivity.class);
+            Intent i = new Intent(Login.this, SplashActivity.class);
             startActivity(i);
         }
 
@@ -68,7 +69,7 @@ public class Login extends AppCompatActivity {
                         String user_id=result;
                         editor.putString("user_id",user_id);
                         editor.commit();
-                        Intent i = new Intent(Login.this, MainActivity.class);
+                        Intent i = new Intent(Login.this, SplashActivity.class);
                         startActivity(i);
                     }
 

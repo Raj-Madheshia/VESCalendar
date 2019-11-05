@@ -11,8 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -23,6 +25,7 @@ import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -34,11 +37,12 @@ public class FragmentEvents extends Fragment {
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
     ListView listView;
     TextView yearmonth;
-
+    private ImageView left, right;
     FloatingActionButton floatingActionButton;
 
     SqliteDatabaseHelper sqliteDatabaseHelper;
     private String clickeddate;
+    private String currentDate;
     Date todayDate = Calendar.getInstance().getTime();
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -56,10 +60,15 @@ public class FragmentEvents extends Fragment {
         Event ev;
         sqliteDatabaseHelper = new SqliteDatabaseHelper(view.getContext());
         clickeddate= formatter.format(todayDate);
+        currentDate = formatter.format(todayDate);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
         Date gmt = null;
 
-
+        String Year= currentDate.substring(0,4);
+        String month = currentDate.substring(5,7);
+        String months[] ={"Jan","Feb","Mar","Apr", "May", "Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+        int monthint = Integer.parseInt(month) -1;
+        yearmonth.setText(months[monthint]+" "+Year);
 
         String ID[];
         String TITLE[];
@@ -106,6 +115,14 @@ public class FragmentEvents extends Fragment {
             TIME= new String[size];
         }
 
+        left = (ImageView) view.findViewById(R.id.left);
+        right = (ImageView) view.findViewById(R.id.right);
+//        left.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ompactCalendarView.showNextMonth();
+//            }
+//        });
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             public void onDayClick(Date dateClicked) {
                 List<Event> events = compactCalendarView.getEvents(dateClicked);
@@ -218,9 +235,24 @@ public class FragmentEvents extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AddNewEvent.class);
-                intent.putExtra("date", clickeddate);
-                startActivity(intent);
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    Date date1 = format.parse(currentDate);
+                    Date date2 = format.parse(clickeddate);
+                    if (date1.compareTo(date2) <=0) {
+                        Intent intent = new Intent(getActivity(), AddNewEvent.class);
+                        intent.putExtra("date", clickeddate);
+                        startActivity(intent);
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Event cannot be added on previous dates",Toast.LENGTH_SHORT).show();
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+
             }
         });
 

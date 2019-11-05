@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="#ecf572"
+    android:background="@color/maincolor"
     android:layout_height="match_parent">
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:layout_margin="30dp"
-        android:src="@mipmap/logo4"
+        android:src="@mipmap/logo"
         />
     <EditText
         android:layout_width="match_parent"
@@ -49,7 +49,7 @@
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:id="@+id/logIntoAccount"
-        android:backgroundTint="#7620bb"
+        android:backgroundTint="@color/colorPrimary"
         android:text="Login"
         android:textSize="24sp"
         android:background="@drawable/circular_edittext"/>
