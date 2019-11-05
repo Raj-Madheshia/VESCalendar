@@ -131,7 +131,7 @@ public class FragmentCalendar extends Fragment {
 
             String error="";
             id = id.replace("\'","");
-            String connect = String.format("http://192.168.41.175/fetchdata.php?id=%s", id);
+            String connect = String.format("http://192.168.0.106/fetchdata.php?id=%s", id);
             Log.d("URL", connect);
             try {
                 URL url = new URL(connect);

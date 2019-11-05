@@ -19,7 +19,7 @@ public class Background extends AsyncTask<String, Void, String> {
         String email = strings[0];
         String pass = strings[1];
 
-        String connect = "http://192.168.41.175/login.php?email="+email+"&password="+pass;
+        String connect = "http://192.168.0.106/login.php?email="+email+"&password="+pass;
         try {
             URL url = new URL(connect);
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
