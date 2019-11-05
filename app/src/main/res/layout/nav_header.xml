@@ -23,5 +23,6 @@
         android:paddingTop="10dp"
         android:text="Ves Calendar"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#fff"
         android:textSize="20sp" />
 </LinearLayout>

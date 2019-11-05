@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.vescalendar">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SET_ALARM"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/logo"
@@ -60,6 +61,17 @@
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
         </activity>
+        <receiver
+            android:name=".Notificationreceiver"
+            android:enabled="true"
+            android:exported="false" >
+        </receiver>
+        <service
+            android:name=".NotificationClass"
+            android:exported="false" >
+        </service>
+
     </application>
+
 
 </manifest>
