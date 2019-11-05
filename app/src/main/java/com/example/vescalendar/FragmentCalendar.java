@@ -1,8 +1,11 @@
 package com.example.vescalendar;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,11 +35,17 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 public class FragmentCalendar extends Fragment {
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
     ListView listView;
     String dataFetch =null;
     ProgressBar pb;
@@ -59,6 +68,50 @@ public class FragmentCalendar extends Fragment {
         final String id = sharedPref.getString("user_id", "");
         pb.setVisibility(View.VISIBLE);
         getData(id);
+        SqliteDatabaseHelper sqliteDatabaseHelper = new SqliteDatabaseHelper(getActivity());
+        String c_time = sdf.format(new Date());
+        Date todayDate = Calendar.getInstance().getTime();
+        String c_date = format.format(todayDate);
+        try{
+            Cursor res = sqliteDatabaseHelper.getDataForNotification(c_date,c_time);
+            String e_id="";
+            String e_title="";
+            String e_desp="";
+            String e_date="";
+            String e_time="";
+            while(res.moveToNext()) {
+                e_id = res.getString(0);
+                e_title = res.getString(1);
+                e_desp = res.getString(2);
+                e_date = res.getString(3);
+                e_time = res.getString(4);
+            }
+            Calendar c= Calendar.getInstance();
+            String month = e_date.substring(5,7);
+            String months[] ={"Jan","Feb","Mar","Apr", "May", "Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+            int monthint = Integer.parseInt(month) -1;
+            String da = e_date.substring(8,10);
+            c.set(Calendar.MONTH, monthint);
+            c.set(Calendar.DAY_OF_MONTH, Integer.valueOf(da));
+            String hr = e_time.substring(0,2);
+            String mi = e_time.substring(3,e_time.length()-1);
+            c.set(Calendar.HOUR_OF_DAY, Integer.valueOf(hr));
+            c.set(Calendar.MINUTE, Integer.valueOf(mi));
+
+
+            Intent notifyIntent = new Intent(getContext(),Notificationreceiver.class);
+            Bundle b = new Bundle();
+            b.putString("title",e_title);
+            b.putString("desp",e_desp);
+            notifyIntent.putExtras(b);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(getContext(),100 , notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            AlarmManager alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,  c.getTimeInMillis(),
+                    1000 * 60 * 60 * 24, pendingIntent);
+
+        }catch (Exception e){
+
+        }
 
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -239,7 +292,7 @@ public class FragmentCalendar extends Fragment {
             eventTitle.setText(mTitle[position]);
             //eventDesp.setText(mDesp[position]);
             eventDate.setText("Date: "+mdate[position]);
-            eventTime.setText("Time: "+mtime[position]);
+            eventTime.setText(mtime[position]);
 
             return event;
         }

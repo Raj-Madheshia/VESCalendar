@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="176dp"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/maincolor"
     android:gravity="bottom"
     android:orientation="vertical"
     android:padding="16dp"
@@ -23,5 +23,6 @@
         android:paddingTop="10dp"
         android:text="Ves Calendar"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#fff"
         android:textSize="20sp" />
 </LinearLayout>

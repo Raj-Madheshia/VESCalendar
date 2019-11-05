@@ -65,7 +65,20 @@ public class AddNewEvent extends AppCompatActivity {
                 mTimePicker = new TimePickerDialog(AddNewEvent.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker tp, int selectedHour, int selectedMinute) {
-                        timePicker.setText( selectedHour + ":" + selectedMinute);
+                        String s,m;
+                        if (selectedHour<10){
+                            s = 0+ String.valueOf(selectedHour);
+                        }
+                        else{
+                            s = String.valueOf(selectedHour);
+                        }
+                        if (selectedMinute<10){
+                            m = 0+ String.valueOf(selectedMinute);
+                        }
+                        else{
+                            m = String.valueOf(selectedMinute);
+                        }
+                        timePicker.setText( s + ":" + m);
                     }
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");

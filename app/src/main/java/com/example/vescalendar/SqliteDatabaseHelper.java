@@ -84,4 +84,12 @@ public class SqliteDatabaseHelper extends SQLiteOpenHelper {
         return db.delete(TABLE_NAME,"ID = ?", new String[]{id});
     }
 
+    public Cursor getDataForNotification(String a, String t){
+        String date = "'"+a+"'";
+        String time = "'"+t+"'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        String s = "select * from "+TABLE_NAME + "  where EVENT_DATE >= "+ date + " and EVENT_TIME >="+ time +" order by EVENT_DATE, EVENT_TIME LIMIT 1";
+        Cursor res =   db.rawQuery(s, null);
+        return res;
+    }
 }
