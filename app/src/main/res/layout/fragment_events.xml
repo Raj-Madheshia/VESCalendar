@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#38324e"
+    android:background="@drawable/gradient"
     android:id="@+id/eventfragmentmain">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/maincolor"
+        android:background="@drawable/gradient"
         android:gravity="center_vertical|left"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical"
@@ -33,8 +33,8 @@
         android:layout_height="250dp"
         app:compactCalendarTargetHeight="300dp"
         app:compactCalendarTextSize="12sp"
-        app:compactCalendarBackgroundColor="#403a60"
-        app:compactCalendarTextColor="#fff"
+        app:compactCalendarBackgroundColor="#f0eff5"
+        app:compactCalendarTextColor="#403a60"
         app:compactCalendarCurrentSelectedDayBackgroundColor="#862C03"
         app:compactCalendarCurrentDayBackgroundColor="#BE3737"
         app:compactCalendarMultiEventIndicatorColor="#fff"
@@ -54,7 +54,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/maincolor"
+        android:background="@drawable/gradient"
         android:layout_marginTop="5dp"
         android:orientation="vertical">
 
