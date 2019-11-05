@@ -35,6 +35,8 @@ public class AddNewEvent extends AppCompatActivity {
     private TextView heading;
     private String date;
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,8 +90,32 @@ public class AddNewEvent extends AppCompatActivity {
                         Date d1 = sdf.parse(presentTime());
                         Date d2 = sdf.parse(time);
                         long elapsed = d2.getTime() - d1.getTime();
-                        if(elapsed < 0){
-                            Toast.makeText(AddNewEvent.this, "Previous time not allowed", Toast.LENGTH_SHORT).show();
+                        Date todayDate = Calendar.getInstance().getTime();
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                        String currentDate = formatter.format(todayDate);
+
+                        Date date1 = format.parse(currentDate);
+                        Date date2 = format.parse(date);
+
+                        if(elapsed < 0 ){
+                            if(date1.compareTo(date2) <0){
+                                boolean inserted = sqliteDatabaseHelper.insertDate(title, desp, date, time);
+                                if(!inserted){
+                                    Toast.makeText(AddNewEvent.this, "Unable to insert data", Toast.LENGTH_SHORT).show();
+                                }
+                                else{
+                                    Toast.makeText(AddNewEvent.this, "Data Inserted", Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(AddNewEvent.this, MainActivity.class);
+                                    Bundle b = new Bundle();
+                                    b.putString("toOpen","FragmentEvents");
+                                    i.putExtras(b);
+                                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(i);
+                                }
+                            }
+                            else {
+                                Toast.makeText(AddNewEvent.this, "Previous time not allowed", Toast.LENGTH_SHORT).show();
+                            }
                         }
                         else{
                             boolean inserted = sqliteDatabaseHelper.insertDate(title, desp, date, time);
@@ -104,10 +130,9 @@ public class AddNewEvent extends AppCompatActivity {
                                 i.putExtras(b);
                                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(i);
-
-
                             }
                         }
+
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -127,6 +152,7 @@ public class AddNewEvent extends AppCompatActivity {
     String presentTime(){
         return sdf.format(new Date());
     }
+
     public void onBackPressed() {
         super.onBackPressed();
     }

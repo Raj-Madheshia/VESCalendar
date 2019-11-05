@@ -64,6 +64,11 @@ public class FragmentEvents extends Fragment {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
         Date gmt = null;
 
+        String Year= currentDate.substring(0,4);
+        String month = currentDate.substring(5,7);
+        String months[] ={"Jan","Feb","Mar","Apr", "May", "Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+        int monthint = Integer.parseInt(month) -1;
+        yearmonth.setText(months[monthint]+", "+Year);
 
         String ID[];
         String TITLE[];
