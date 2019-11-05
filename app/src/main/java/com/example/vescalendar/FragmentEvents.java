@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -40,6 +42,7 @@ public class FragmentEvents extends Fragment {
 
     SqliteDatabaseHelper sqliteDatabaseHelper;
     private String clickeddate;
+    private String currentDate;
     Date todayDate = Calendar.getInstance().getTime();
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -57,9 +60,9 @@ public class FragmentEvents extends Fragment {
         Event ev;
         sqliteDatabaseHelper = new SqliteDatabaseHelper(view.getContext());
         clickeddate= formatter.format(todayDate);
+        currentDate = formatter.format(todayDate);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
         Date gmt = null;
-
 
 
         String ID[];
@@ -227,9 +230,24 @@ public class FragmentEvents extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AddNewEvent.class);
-                intent.putExtra("date", clickeddate);
-                startActivity(intent);
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    Date date1 = format.parse(currentDate);
+                    Date date2 = format.parse(clickeddate);
+                    if (date1.compareTo(date2) <=0) {
+                        Intent intent = new Intent(getActivity(), AddNewEvent.class);
+                        intent.putExtra("date", clickeddate);
+                        startActivity(intent);
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Event cannot be added on previous dates",Toast.LENGTH_SHORT).show();
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+
             }
         });
 
